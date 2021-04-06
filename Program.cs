@@ -8,13 +8,14 @@ class Program
 {
     static int Main()
     {
-        //Console.WriteLine(LowestCommonMult(17, 5));
         DateTime StartTime = System.DateTime.UtcNow;
 
         //Console.ReadKey();
 
         //List<Int32> PrimeList = new List<Int32>();
+        //Lists are not thread-safe, this causes a race condition and can lead to some strange errors, use ConcurrentBags
         ConcurrentBag<Int32> PrimeList = new ConcurrentBag<Int32>();
+
 
         //Caveat, SampleSize<int> and TotalCore<int> NEED to be devisible by eachother, otherwise numbers will be skipped.
         Int32 SampleSize = 10000000;
