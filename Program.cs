@@ -6,8 +6,8 @@ using System.Threading;
 
 class Program
 {
-    static int Main()
-    {
+    static int Main(string[] Args)
+    {   
         DateTime StartTime = System.DateTime.UtcNow;
 
         //Console.ReadKey();
@@ -19,7 +19,8 @@ class Program
 
         //Caveat, SampleSize<int> and TotalCore<int> NEED to be devisible by eachother, otherwise numbers will be skipped.
         Int32 SampleSize = 10000000;
-        Int32 TotalCore = Environment.ProcessorCount + 8; 
+        //Int32 TotalCore = Environment.ProcessorCount + 4; // org: +8 
+        Int32 TotalCore = 10;
         Int32 BatchSize = SampleSize / TotalCore; // e.g. 1/12th of the total
         Int32 TargetThreadSize = RoundUp(TotalCore); //round current core count to closest 10
         //Int32 CurrentCore = TotalCore;
@@ -73,10 +74,11 @@ class Program
         return 0;
     }
 
-    public static int RoundUp(int value)
+    public static int RoundUp(int Value)
     {
-        return 10 * ((value + 9) / 10);
+        return 10 * ((Value + 9) / 10);
     }
+
     /*
     public static int LowestCommonMult(int Number1, int Number2)
     {
@@ -102,16 +104,16 @@ class Program
         return num1 * num2;
     }
     */
-    public static bool IsPrime(int number)
+    public static bool IsPrime(int Number)
     {
-        if (number % 2 == 0) return false;
-        if (number <= 1) return false;
-        if (number == 2) return true;
+        if (Number % 2 == 0) return false;
+        if (Number <= 1) return false;
+        if (Number == 2) return true;
         
-        var boundary = (int)Math.Floor(Math.Sqrt(number));
+        var boundary = (int)Math.Floor(Math.Sqrt(Number));
 
         for (int i = 3; i <= boundary; i += 2)
-            if (number % i == 0)
+            if (Number % i == 0)
                 return false;
 
         return true;
